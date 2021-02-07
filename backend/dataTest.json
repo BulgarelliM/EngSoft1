@@ -1,0 +1,11 @@
+{
+    "_id": { "$oid": "601f3cf6f966dabe87bafe61" }, 
+    "codigo": { "$numberInt": "1" }, 
+    "logradouro": "Rua dos Bobos", 
+    "numero": { "$numberInt": "0" }, 
+    "complemento": "-", 
+    "bairro": "Dos Trouxas", 
+    "CEP": "3522000", 
+    "cidade": "Ceferno",
+    "UF": "MG"
+}
