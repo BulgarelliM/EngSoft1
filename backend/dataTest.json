@@ -1,5 +1,4 @@
 {
-    "_id": { "$oid": "601f3cf6f966dabe87bafe61" }, 
     "codigo": { "$numberInt": "1" }, 
     "logradouro": "Rua dos Bobos", 
     "numero": { "$numberInt": "0" }, 

@@ -16,12 +16,12 @@ async function run(db, table,query) {
     }
 }
 
-async function insert(db, table, data) {
+async function insert(db, table) {
     try {
         await client.connect();
         const database = client.db(db);
         const collection = database.collection(table);
-        const movie = await collection.insertOne(data);
+        const movie = await collection.insertOne(require('./dataTest.json'));
         console.log(movie);
     } finally {
         // Ensures that the client will close when you finish/error
@@ -29,7 +29,8 @@ async function insert(db, table, data) {
     }
 }
 
-// run('DB-imoveis','endereco', { cidade: 'Obidos' }).catch(console.dir);
+run('DB-imoveis','endereco', { cidade: 'Obidos' }).catch(console.dir);
+insert('DB-imoveis','endereco').catch(console.dir);
 
 module.exports.run = run;
 module.exports.insert = insert;
