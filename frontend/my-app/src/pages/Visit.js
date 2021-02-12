@@ -32,6 +32,7 @@ class HouseAdd extends React.Component {
       rooms: number,
     });
   };
+  
   render() {
     return (
       <React.Fragment>

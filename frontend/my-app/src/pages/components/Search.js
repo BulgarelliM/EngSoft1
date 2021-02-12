@@ -1,23 +1,22 @@
 import * as React from "react";
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
+import TextField from '@material-ui/core/TextField';
+
 
 class Search extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <InputBase
-          className={classes.input}
-          placeholder="Search Google Maps"
-          inputProps={{ "aria-label": "search google maps" }}
+        <TextField
+          id="outlined-full-width"
+          label={this.props.label}
+          placeholder={this.props.placeholder}
+          fullWidth
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
         />
-        <IconButton
-          type="submit"
-          className={classes.iconButton}
-          aria-label="search"
-        >
-          <SearchIcon />
-        </IconButton>
       </React.Fragment>
     );
   }
