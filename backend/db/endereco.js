@@ -12,4 +12,4 @@ const EnderecoSchema = new Schema({
     UF: String
 });
 
-module.exports = mongoose.model('Endereco', EnderecoSchema);
+module.exports = mongoose.model('Endereco', EnderecoSchema, 'endereco');

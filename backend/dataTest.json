@@ -1,5 +1,5 @@
 {
-    "codigo": { "$numberInt": "1" }, 
+    "codigo": { "$numberInt": "10" }, 
     "logradouro": "Rua dos Bobos", 
     "numero": { "$numberInt": "0" }, 
     "complemento": "-", 
