@@ -2,6 +2,8 @@
 const express = require('express') // the library we will use to handle requests. import it here
 const app = express() // instantiate express
 const mongoose = require('mongoose'); // requisicao ao mongo
+const bodyParser = require('body-parser')
+
 const uri = 'mongodb+srv://admin-tp1:tp1-engsoftware@cluster0.af72t.mongodb.net/DB-imoveis?authSource=admin&replicaSet=atlas-9h1mtz-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true'
 
 try {
@@ -10,6 +12,11 @@ try {
     } catch (error) { 
     console.log('Não foi possível conectar') 
 }
+
+
+app.use(require("cors")()) // allow Cross-domain requests 
+app.use(bodyParser.json()) // When someone sends something to the server, we can recieve it in JSON format
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(require('./api/endereco_req'))
 

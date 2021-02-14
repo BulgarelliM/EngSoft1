@@ -2,11 +2,8 @@ const express = require('express')
 const app = express() // instantiate express
 const router = express.Router()
 const Endereco = require('../db/endereco')
-const bodyParser = require('body-parser')
 
-app.use(require("cors")()) // allow Cross-domain requests 
-app.use(bodyParser.json()) // When someone sends something to the server, we can recieve it in JSON format
-app.use(bodyParser.urlencoded({ extended: false }))
+
 app.use('/', router)
 
 router.use(function(req, res, next) {
