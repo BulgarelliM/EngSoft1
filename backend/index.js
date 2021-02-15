@@ -7,10 +7,10 @@ const bodyParser = require('body-parser')
 const uri = 'mongodb+srv://admin-tp1:tp1-engsoftware@cluster0.af72t.mongodb.net/DB-imoveis?authSource=admin&replicaSet=atlas-9h1mtz-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true'
 
 try {
-    mongoose.connect( uri, {useNewUrlParser: true, useUnifiedTopology: true}, () =>
-    console.log('Conectado'))   
-    } catch (error) { 
-    console.log('Não foi possível conectar') 
+    mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, () =>
+        console.log('Conectado'))
+} catch (error) {
+    console.log('Não foi possível conectar')
 }
 
 
@@ -19,6 +19,9 @@ app.use(bodyParser.json()) // When someone sends something to the server, we can
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(require('./api/endereco_req'))
+app.use(require('./api/apartamento_req'))
+app.use(require('./api/casa_req'))
+app.use(require('./api/usuario_req'))
 
 // listen for requests on port 8000
 const port = 8000

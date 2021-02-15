@@ -12,22 +12,25 @@ const ApartamentoSchema = new Schema({
     num_sala_jantar: Number,
     andar: Number,
     portaria_24: Boolean,
-    foto: [{
-        $binary: "",
-        $type: "0"
-    },  {
-        $binary: "",
-        $type: "0"
-    },  {
-        $binary: "",
-        $type: "0"
-    },  {
-        $binary: "",
-        $type: "0"
-    },  {
-        $binary: "",
-        $type: "0"
-        }]
+    login_proprietario: String,
+    login_inquilino: String,
+    codigo: Number
+        /*     foto: [{
+                $binary: "",
+                $type: "0"
+            },  {
+                $binary: "",
+                $type: "0"
+            },  {
+                $binary: "",
+                $type: "0"
+            },  {
+                $binary: "",
+                $type: "0"
+            },  {
+                $binary: "",
+                $type: "0"
+                }] */
 })
 
 module.exports = mongoose.model('Apartamento', ApartamentoSchema, 'apartamento');

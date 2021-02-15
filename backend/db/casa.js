@@ -10,7 +10,8 @@ const CasaSchema = new Schema({
     armario_embutido: Boolean,
     descricao: String,
     login_proprietario: String,
-    login_inquilino: String
+    login_inquilino: String,
+    codigo: Number
 });
 
 module.exports = mongoose.model('Casa', CasaSchema, 'casa');
