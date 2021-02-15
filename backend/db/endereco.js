@@ -10,6 +10,6 @@ const EnderecoSchema = new Schema({
     CEP: Number,
     cidade: String,
     UF: String
-});
+})
 
-module.exports = mongoose.model('Endereco', EnderecoSchema);
+module.exports = mongoose.model('Endereco', EnderecoSchema, 'endereco');
