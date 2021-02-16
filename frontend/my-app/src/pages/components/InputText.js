@@ -1,9 +1,17 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 class InputText extends React.Component {
+  constructor() {
+    super();
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(event) {
+    console.log(event.target)
+    this.props.onChange(event.target.name, event.target.value);
+  }
   render() {
     return (
       <React.Fragment>
@@ -14,9 +22,12 @@ class InputText extends React.Component {
             endAdornment: <InputAdornment position="end">m²</InputAdornment>,
           }}
           type="number"
+         
           InputLabelProps={{
             shrink: true,
           }}
+          name={this.props.name}
+          onChange={this.onChange}
           variant="outlined"
         />
       </React.Fragment>

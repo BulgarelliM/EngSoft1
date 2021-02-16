@@ -2,22 +2,30 @@ import React from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
-import React from "react";
-
 class ToogleButton extends React.Component {
+  constructor() {
+    super();
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(event) {
+    this.props.onChange(event.target.name,event.target.checked);
+  }
   render() {
     return (
       <React.Fragment>
         <FormControlLabel
+        style={{color:"#505050", margin:"10px"} }
+        labelPlacement="start"
         control={
           <Switch
-            checked={state.checkedB}
-            onChange={handleChange}
-            name="checkedB"
-            color="primary"
+            checked={this.props.checked}
+            onChange={this.onChange}
+            name={this.props.name}
+            color="default"
           />
         }
-        label="Primary"
+        label={this.props.label}
       />
       </React.Fragment>
     );
