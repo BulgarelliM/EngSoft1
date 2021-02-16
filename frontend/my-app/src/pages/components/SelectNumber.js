@@ -5,6 +5,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 class SelectNumber extends React.Component {
   constructor() {
     super();
+    this.onChange = this.onChange.bind(this);
+  }
+  
+  
+  onChange(event) {
+    this.props.onChange(event.target.value)
   }
 
   render() {
@@ -15,12 +21,13 @@ class SelectNumber extends React.Component {
           select
           label={this.props.label}
           value={this.props.value}
-          style={{width: "100%"}}
+          fullWidth
+          margin="normal"
           variant="outlined"
           InputLabelProps={{
             shrink: true,
           }}
-          onChange={this.props.handleChange}
+          onChange={this.onChange}
         >
           {this.props.options.map((option) => (
             <MenuItem key={option.value} value={option.value}>

@@ -4,8 +4,12 @@ import TextField from "@material-ui/core/TextField";
 class InputNumber extends React.Component {
   constructor() {
     super();
+    this.onChange = this.onChange.bind(this);
   }
 
+  onChange(event) {
+    this.props.onChange(event.target.name,event.target.value);
+  }
   render() {
     return (
       <React.Fragment>
@@ -16,8 +20,9 @@ class InputNumber extends React.Component {
           InputLabelProps={{
             shrink: true,
           }}
+          name={this.props.name}
           value={this.props.value}
-          onChange={this.props.setValue}
+          onChange={this.onChange}
           variant="outlined"
         />
       </React.Fragment>
