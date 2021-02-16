@@ -3,7 +3,7 @@ const uri = 'mongodb+srv://admin-tp1:tp1-engsoftware@cluster0.af72t.mongodb.net/
 
 const client = new MongoClient(uri, { useUnifiedTopology: true });
 
-async function run(db, table,query) {
+async function run(db, table, query) {
     try {
         await client.connect();
         const database = client.db(db);
@@ -29,8 +29,8 @@ async function insert(db, table) {
     }
 }
 
-run('DB-imoveis','endereco', { cidade: 'Obidos' }).catch(console.dir);
-insert('DB-imoveis','endereco').catch(console.dir);
+run('DB-imoveis', 'endereco', { cidade: 'Obidos' }).catch(console.dir);
+insert('DB-imoveis', 'endereco').catch(console.dir);
 
 module.exports.run = run;
 module.exports.insert = insert;
