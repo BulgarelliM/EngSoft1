@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
 
-class InputArea extends React.Component {
+class Input extends React.Component {
   constructor() {
     super();
     this.onChange = this.onChange.bind(this);
@@ -19,20 +19,19 @@ class InputArea extends React.Component {
           id="outlined-multiline-flexible"
           label={this.props.label}
           name={this.props.name}
+          placeholder={this.props.placeholder}
           onChange={this.onChange}
-          margin="normal"
+          margin={this.props.margin?"normal":"none"}
           InputLabelProps={{
             shrink: true,
           }}
+          type={this.props.password?"password":""}
           fullWidth
-          placeholder={this.props.placeholder}
-          multiline
           variant="outlined"
-          rowsMax={10}
         />
       </React.Fragment>
     );
   }
 }
 
-export default InputArea;
+export default Input;

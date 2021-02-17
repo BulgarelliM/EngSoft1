@@ -1,14 +1,16 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
-class InputNumber extends React.Component {
+class InputValues extends React.Component {
   constructor() {
     super();
     this.onChange = this.onChange.bind(this);
   }
 
   onChange(event) {
-    this.props.onChange(event.target.name,event.target.value);
+    console.log(event.target);
+    this.props.onChange(event.target.name, event.target.value);
   }
   render() {
     return (
@@ -16,15 +18,16 @@ class InputNumber extends React.Component {
         <TextField
           id="outlined-number"
           label={this.props.label}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">R$</InputAdornment>,
+          }}
           type="number"
+          fullWidth
+          placeholder={this.props.placeholder}
           InputLabelProps={{
             shrink: true,
           }}
-          InputProps={{ inputProps: { min: 0} }}
-          fullWidth
-          placeholder={this.props.placeholder}
           name={this.props.name}
-          value={this.props.value}
           onChange={this.onChange}
           variant="outlined"
         />
@@ -33,4 +36,4 @@ class InputNumber extends React.Component {
   }
 }
 
-export default InputNumber;
+export default InputValues;

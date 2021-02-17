@@ -19,10 +19,10 @@ class InputText extends React.Component {
           id="outlined-number"
           label={this.props.label}
           InputProps={{
-            endAdornment: <InputAdornment position="end">m²</InputAdornment>,
+            endAdornment: <InputAdornment position="end">m²</InputAdornment>, inputProps: { min: 0} 
           }}
           type="number"
-         
+          placeholder={this.props.placeholder}
           InputLabelProps={{
             shrink: true,
           }}

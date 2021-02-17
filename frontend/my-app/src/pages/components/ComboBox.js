@@ -27,11 +27,11 @@ class ComboBox extends React.Component {
           renderInput={(params) => (
             <TextField
               fullWidth
-              margin="normal"
               {...params}
               label={this.props.label}
               onChange={this.onChange}
               onSelect={this.onChange}
+              placeholder={this.props.placeholder}
               variant="outlined"
               InputLabelProps={{
                 shrink: true,
