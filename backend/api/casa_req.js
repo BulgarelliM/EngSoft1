@@ -14,23 +14,24 @@ router.route(`/buscaCasa`)
     .post(function (req, res) {
         let body = {}
         req.body.municipio ? body.municipio = req.body.municipio :
-            req.body.bairro ? body.bairro = req.body.bairro :
-                casa.find({}, function (error, casa) {
-                    if (error) {
-                        res.send(error)
-                    }
-                    if (req.body.num_quartos) {
-                        casa = casa.filter((ap) => {
-                            return ap.num_quartos >= req.body.num_quartos
-                        })
-                    }
-                    if (req.body.valor_aluguel) {
-                        casa = casa.filter((ap) => {
-                            return ap.valor_aluguel <= req.body.valor_aluguel
-                        })
-                    }
-                    res.send(casa)
-                })
+        req.body.bairro ? body.bairro = req.body.bairro :
+        console.log(body)
+            Casa.find(body, function (error, casa) {
+                if (error) {
+                    res.send(error)
+                }
+                if (req.body.num_quartos) {
+                    casa = casa.filter((ap) => {
+                        return ap.num_quartos >= req.body.num_quartos
+                    })
+                }
+                if (req.body.valor_aluguel) {
+                    casa = casa.filter((ap) => {
+                        return ap.valor_aluguel <= req.body.valor_aluguel
+                    })
+                }
+                res.send(casa)
+            })
     })
 
 // Rotas que irão terminar em '/casas' - (servem tanto para: GET All & POST)

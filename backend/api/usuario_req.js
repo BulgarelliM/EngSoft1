@@ -25,18 +25,12 @@ router.route(`/usuario`)
     /* 1) Método: Atribuir doc na collection (acessar em: POST http://localhost:8000/usuario */
     .post(function (req, res) {
 
-        /* // Criptografa a senha
-        const encryptPassword = password => {
-            const salt = bcrypt.genSaltSync(10)
-            return bcrypt.hashSync(password, salt)
-        } */
         const usuario = new Usuario({
             nome: req.body.nome,
             email: req.body.email,
             login: req.body.login,
             senha: req.body.senha,
-            telefone: req.body.telefone,
-            admin: req.body.admin
+            telefone: req.body.telefone
         })
 
         usuario.save(function (error) {
@@ -86,7 +80,7 @@ router.route('/usuario/:codigo')
             usuario.login = req.body.login
             usuario.senha = req.body.senha
             usuario.telefone = req.body.telefone
-            usuario.admin = req.body.admin
+
             //Terceiro: Salvando alteração...
             usuario.save(function (error) {
                 if (error)
