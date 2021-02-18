@@ -17,4 +17,4 @@ function base64_encode(fileName) {
     return new Buffer.from(bitmap).toString('base64');
 }
 
-base64_decode(base64_encode(fileName), 'pets1.jpg')
+console.log(base64_encode(fileName))
