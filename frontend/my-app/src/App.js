@@ -5,6 +5,7 @@ import ListHouses from "./pages/ListHouses"
 import Login from "./pages/Login"
 import Logo from "./logo.png"
 import CreateUser from "./pages/CreateUser"
+import ListProperty from "./pages/ListProperty"
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 const style = {
   position: "fixed",
@@ -28,6 +29,7 @@ function App() {
             <Route path="/add" component={HouseAdd} />
             <Route path="/houses" component={ListHouses} />
             <Route path="/create" component={CreateUser} />
+            <Route path="/listProperty" component={ListProperty} />
         </Switch>
     </ BrowserRouter>
       </header>

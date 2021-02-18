@@ -9,7 +9,9 @@ import Grid from "@material-ui/core/Grid";
 import ComboBox from "./components/ComboBox";
 import ToogleButton from "./components/ToogleButton";
 import municipios from "./base/municipios.json";
+import queryString from 'query-string';
 import bairros from "./base/bairros.json";
+import saveHouse from "./functions/saveHouse"
 
 const style = {
   position: "fixed",
@@ -37,7 +39,7 @@ function getNeighborhood(city) {
   return response.sort();
 }
 
-
+var id =0
 class HouseAdd extends React.Component {
   constructor() {
     super();
@@ -53,6 +55,7 @@ class HouseAdd extends React.Component {
       aluguel: 0.0,
       city: "",
       neighborhood: "",
+      house: "",
       neighborhoodsOptions: [],
       citys:[]
     };
@@ -62,7 +65,41 @@ class HouseAdd extends React.Component {
     this.changeCity = this.changeCity.bind(this);
     this.changeNeighborhood = this.changeNeighborhood.bind(this);
   }
-  
+  save = async () => {
+    let type = this.state.house?"casa":"apartamento"
+    let response = await saveHouse(
+      type,
+      this.state.suites,
+      this.state.sala_de_estar,
+      this.state.quartos,
+      this.state.vagas_garagem,
+      this.state.area,
+      this.state.armario_embutido,
+      this.state.descricao,
+      this.state.aluguel,
+      this.state.city,
+      this.state.neighborhood,
+      this.state.endereco,
+      this.state.Andar,
+      this.state.portaria_24h,
+      this.state.sala_de_jantar,
+      this.state.Condominio,
+      id
+    )
+    console.log(response)
+    if(response !=  false){
+      this.props.history.push("/");
+    }else{
+      this.setState({ 
+        errorCreate: true,
+      })
+    }
+  } 
+  close = () =>{
+    this.setState({
+      errorCreate: false,
+    })
+  }
 changeNeighborhood = (text) => {
   this.setState({
     neighborhood: text,
@@ -87,6 +124,8 @@ changeCity = (text) => {
   };
 
   componentWillMount(){
+    let params = queryString.parse(this.props.location.search)
+    id = params.id
     this.setState({
       citys: getCitys(),
     })

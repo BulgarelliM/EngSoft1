@@ -2,7 +2,7 @@ import * as React from "react";
 import HouseCard from "./components/HouseCard";
 import Grid from "@material-ui/core/Grid";
 import queryString from 'query-string';
-
+import findHouse from "./functions/findHouses"
 const style = {
   position: "fixed",
   top: "50%",
@@ -12,14 +12,12 @@ const style = {
   padding: "0px !important",
   margin: "5px",
 };
-
+var houses = []
 
 class ListHouses extends React.Component {
   constructor() {
     super();
-    this.state = {
-      houses: [],
-    };
+    
   }
 
   handleDateChange = (name, value) => {
@@ -32,9 +30,11 @@ class ListHouses extends React.Component {
   save_house = () => {
     console.log(this.state);
   };
-  componentWillMount(){
+
+  async componentWillMount(){
     let params = queryString.parse(this.props.location.search)
     console.log(params)
+    houses = findHouse(params.city,params.neighborhood,params.rooms,params.price)
   }
 
   render() {

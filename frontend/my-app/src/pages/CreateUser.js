@@ -2,7 +2,10 @@ import * as React from "react";
 import Input from "./components/Input";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-
+import saveUser from "./functions/saveUser";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 const style = {
   position: "fixed",
   top: "50%",
@@ -19,12 +22,28 @@ class CreateUser extends React.Component {
         email:"",
         login:"",
         senha:"",
-        telefone: "" 
+        telefone: "" ,
+        errorCreate: false
     };
 
     this.handleDateChange = this.handleDateChange.bind(this);
   }
-
+  save = async () => {
+    let response = await saveUser(this.state.nome,this.state.email,this.state.login,this.state.senha,this.state.telefone)
+    console.log(response)
+    if(response !=  false){
+      this.props.history.push("/add?id=" + this.state.login);
+    }else{
+      this.setState({ 
+        errorCreate: true,
+      })
+    }
+  } 
+  close = () =>{
+    this.setState({
+      errorCreate: false,
+    })
+  }
   handleDateChange = (name, value) => {
     console.log(value);
     this.setState({
@@ -35,6 +54,28 @@ class CreateUser extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <Snackbar
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      open={this.state.errorCreate}
+      autoHideDuration={6000}
+      onClose={this.close}
+      message="Não foi possivel criar usuario"
+      action={
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={this.close}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      }
+    />
         <div style={style}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
@@ -77,7 +118,7 @@ class CreateUser extends React.Component {
             <Grid item xs={12}>
               <Button
                 variant="outlined"
-                onClick={this.getHouses}
+                onClick={this.save}
                 to="/Houses"
                 color="primary"
                 style={{ width: "100%" }}
