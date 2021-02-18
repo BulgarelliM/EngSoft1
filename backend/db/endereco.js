@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const EnderecoSchema = new Schema({
     codigo: Number,
@@ -8,8 +8,7 @@ const EnderecoSchema = new Schema({
     complemento: String,
     bairro: String,
     CEP: Number,
-    cidade: String,
-    UF: String
+    cidade: String
 })
 
-module.exports = mongoose.model('Endereco', EnderecoSchema, 'endereco');
+module.exports = mongoose.model('Endereco', EnderecoSchema, 'endereco')

@@ -1,8 +1,9 @@
 // init project
 const express = require('express') // the library we will use to handle requests. import it here
-const app = express() // instantiate express
-const mongoose = require('mongoose'); // requisicao ao mongo
+const mongoose = require('mongoose') // requisicao ao mongo
 const bodyParser = require('body-parser')
+
+const app = express() // instantiate express
 const uri = 'mongodb+srv://admin-tp1:tp1-engsoftware@cluster0.af72t.mongodb.net/DB-imoveis?authSource=admin&replicaSet=atlas-9h1mtz-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true'
 
 try {
@@ -20,9 +21,11 @@ app.use(require('./api/endereco_req'))
 app.use(require('./api/apartamento_req'))
 app.use(require('./api/casa_req'))
 app.use(require('./api/usuario_req'))
+app.use(require('./api/agenda_req'))
+
 
 // listen for requests on port 8000
 const port = 8000
 const listener = app.listen(port, () => {
-    console.log('Serviço executando na porta ' + listener.address().port);
+    console.log('Serviço executando na porta ' + listener.address().port)
 })

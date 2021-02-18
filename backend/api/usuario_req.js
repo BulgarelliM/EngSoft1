@@ -9,41 +9,35 @@ router.use(function (req, res, next) {
     next()
 })
 
-/* Rota de Teste para sabermos se tudo está realmente funcionando (acessar através: GET: http://localhost:8000/) */
-router.get('/', function (req, res) {
-    res.send({ message: 'Seja Bem-Vindo a nossa API' })
-});
-
 // Verifica login-senha
 router.route(`/login`)
     .post(function (req, res) {
-        Usuario.find({ login: req.body.user, senha: req.body.senha }, function (error, usuario) {
+        Usuario.find({ login: req.body.login, senha: req.body.senha }, function (error, usuario) {
             if (error)
                 res.send(error)
-            res.send(usuario)
+            res.send(usuario[0])
         })
     })
+
 // Rotas que irão terminar em '/usuario' - (servem tanto para: GET All & POST)
 router.route(`/usuario`)
 
     /* 1) Método: Atribuir doc na collection (acessar em: POST http://localhost:8000/usuario */
     .post(function (req, res) {
-        console.log(req.body)
+
         const usuario = new Usuario({
             nome: req.body.nome,
             email: req.body.email,
             login: req.body.login,
             senha: req.body.senha,
-            telefone: req.body.telefone,
-            admin: req.body.admin,
-            codigo: req.body.codigo
+            telefone: req.body.telefone
         })
 
         usuario.save(function (error) {
             if (error)
                 res.send(error)
-            res.send({ message: 'Usuario criado!' })
-        });
+            res.send({ message: 'Usuário criado!' })
+        })
     })
 
     /* 2) Método: Selecionar Todos (acessar em: GET http://locahost:8000/usuario) */
@@ -64,7 +58,7 @@ router.route('/usuario/:codigo')
     .get(function (req, res) {
 
         //Função para Selecionar Por Id e verificar se há algum erro:
-        Usuario.find({ login: req.params.login }, function (error, usuario) {
+        Usuario.find({ login: req.body.login }, function (error, usuario) {
             if (error)
                 res.send(error)
 
@@ -76,7 +70,7 @@ router.route('/usuario/:codigo')
     .put(function (req, res) {
 
         //Primeiro: Para atualizarmos, precisamos primeiro achar o usuario. Para isso, vamos selecionar por id:
-        Usuario.find({ login: req.params.login }, function (error, usuario) {
+        Usuario.find({ login: req.body.login }, function (error, usuario) {
             if (error)
                 res.send(error)
 
@@ -86,8 +80,7 @@ router.route('/usuario/:codigo')
             usuario.login = req.body.login
             usuario.senha = req.body.senha
             usuario.telefone = req.body.telefone
-            usuario.admin = req.body.admin,
-                usuario.codigo = req.body.codigo
+
             //Terceiro: Salvando alteração...
             usuario.save(function (error) {
                 if (error)
@@ -102,7 +95,7 @@ router.route('/usuario/:codigo')
     .delete(function (req, res) {
 
         //Função para excluir os dados e também verificar se há algum erro no momento da exclusão:
-        Usuario.remove({ codigo: req.params.codigo }, function (error) {
+        Usuario.remove({ login: req.body.login }, function (error) {
             if (error)
                 res.send(error)
 

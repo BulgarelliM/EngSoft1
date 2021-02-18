@@ -27,8 +27,7 @@ router.route(`/endereco`)
             complemento: req.body.complemento,
             bairro: req.body.bairro,
             CEP: req.body.CEP,
-            cidade: req.body.cidade,
-            UF: req.body.UF
+            cidade: req.body.cidade
         })
 
         endereco.save(function (error) {
@@ -80,7 +79,6 @@ router.route('/endereco/:codigo')
             endereco.bairro = req.body.bairro
             endereco.CEP = req.body.CEP
             endereco.cidade = req.body.cidade
-            endereco.UF = req.body.UF
 
             //Terceiro: Salvando alteração...
             endereco.save(function (error) {
