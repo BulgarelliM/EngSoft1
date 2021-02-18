@@ -20,6 +20,8 @@ class DatePicker extends React.Component {
         label={this.props.label}
         variant = "outlined"
         type="datetime-local"
+        fullWidth
+        margin={"normal"}
         defaultValue={this.props.selectedDate}
         onChange={this.onChange}
         InputLabelProps={{

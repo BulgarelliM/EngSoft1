@@ -1,16 +1,18 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
-import DialogActions from '@material-ui/core/DialogActions';
+import DialogActions from "@material-ui/core/DialogActions";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import SingleBedIcon from "@material-ui/icons/SingleBed";
 import DatePicker from "./DatePicker";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import StraightenOutlinedIcon from "@material-ui/icons/StraightenOutlined";
 import Dialog from "@material-ui/core/Dialog";
+import Input from "./Input";
+import DialogContent from '@material-ui/core/DialogContent';
 
 class HouseCard extends React.Component {
   constructor() {
@@ -32,12 +34,18 @@ class HouseCard extends React.Component {
   };
   handleDateChange = (date) => {
     this.setState({
-      date: date
+      date: date,
     });
   };
   closeDialog = () => {
     this.setState({
       showDates: false,
+    });
+  };
+  handleChange = (name, value) => {
+    console.log(name,value)
+    this.setState({
+      [name]: value,
     });
   }
   render() {
@@ -46,7 +54,7 @@ class HouseCard extends React.Component {
         <Card style={{ textAlign: "initial" }} variant="outlined">
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              {this.props.title}
+              {this.props.type}
             </Typography>
             <Typography variant="h6" component="h2">
               {this.props.end}
@@ -56,13 +64,15 @@ class HouseCard extends React.Component {
             </Typography>
             <Typography color="textSecondary">
               <Grid container spacing={1}>
-                <Grid item xs={3}>
-                  {" "}
-                  <SingleBedIcon /> {this.props.rooms}{" "}
+                <Grid item xs={6}>
+                  <div>
+                    <SingleBedIcon /> {this.props.rooms}
+                  </div>
                 </Grid>
-                <Grid item xs={3}>
-                  {" "}
-                  <SingleBedIcon /> {this.props.area}
+                <Grid item xs={6}>
+                  <div>
+                    <StraightenOutlinedIcon /> {this.props.area}m²
+                  </div>
                 </Grid>
               </Grid>
             </Typography>
@@ -81,17 +91,40 @@ class HouseCard extends React.Component {
           aria-labelledby="simple-dialog-title"
           open={this.state.showDates}
         >
-          <DialogTitle id="simple-dialog-title">Escolha a data</DialogTitle>
-          <DatePicker
-            onChange={this.handleDateChange}
-            selectedDate={this.state.date}
-          />
-           <DialogActions>
-          <Button onClick={this.closeDialog} color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
+          <DialogTitle id="simple-dialog-title">Agendar Visita</DialogTitle>
+          <DialogContent>
+            <DatePicker
+              onChange={this.handleDateChange}
+              selectedDate={this.state.date}
+            />
+            <Input
+              onChange={this.handleChange}
+              name="login"
+              label="Login"
+              margin={true}
+              placeholder="Seu nome completo"
+            ></Input>
+            <Input
+              onChange={this.handleChange}
+              name="cpf"
+              label="CPF"
+              margin={true}
+              placeholder="Seu CPF"
+            ></Input>
+            <Input
+              onChange={this.handleChange}
+              name="telefone"
+              label="Telefone"
+              margin={true}
+              placeholder="Seu telefone"
+            ></Input>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.closeDialog} color="primary">
+              Agendar
+            </Button>
+          </DialogActions>
+        </Dialog>
       </React.Fragment>
     );
   }
