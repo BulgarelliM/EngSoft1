@@ -53,5 +53,6 @@ export default async function getPropertyById(id) {
     .catch((error) => {
       console.error(error);
     });
-  return propertys;
+   
+    return propertys;
 }

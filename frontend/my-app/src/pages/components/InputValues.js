@@ -19,7 +19,7 @@ class InputValues extends React.Component {
           id="outlined-number"
           label={this.props.label}
           InputProps={{
-            endAdornment: <InputAdornment position="end">R$</InputAdornment>,
+            endAdornment: <InputAdornment position="end">R$</InputAdornment>, inputProps: { min: 0} 
           }}
           type="number"
           fullWidth

@@ -8,11 +8,13 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import SingleBedIcon from "@material-ui/icons/SingleBed";
 import DatePicker from "./DatePicker";
+import Snackbar from "@material-ui/core/Snackbar";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import StraightenOutlinedIcon from "@material-ui/icons/StraightenOutlined";
 import Dialog from "@material-ui/core/Dialog";
 import Input from "./Input";
-import DialogContent from '@material-ui/core/DialogContent';
+import DialogContent from "@material-ui/core/DialogContent";
+import agend from "../functions/agend";
 
 class HouseCard extends React.Component {
   constructor() {
@@ -20,6 +22,7 @@ class HouseCard extends React.Component {
     this.state = {
       showDates: false,
       selectedDate: new Date(),
+      agendado: false,
     };
 
     this.changeShowDates = this.changeShowDates.bind(this);
@@ -43,14 +46,44 @@ class HouseCard extends React.Component {
     });
   };
   handleChange = (name, value) => {
-    console.log(name,value)
+    console.log(name, value);
     this.setState({
       [name]: value,
     });
+  };
+  saveVisit = async () => {
+    let agendar = await agend(
+      this.state.date,
+      this.props.id,
+      this.state.nome,
+      this.state.cpf,
+      this.state.telefone
+    );
+    if (agendar) {
+      this.setState({
+        agendado: true,
+        showDates: false
+      });
+    }
+  };
+  close = () =>{
+    this.setState({
+      agendado: false,
+    })
   }
   render() {
     return (
       <React.Fragment>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          open={this.state.agendado}
+          autoHideDuration={2000}
+          onClose={this.close}
+          message="Agendado com sucesso"
+        />
         <Card style={{ textAlign: "initial" }} variant="outlined">
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
@@ -99,8 +132,8 @@ class HouseCard extends React.Component {
             />
             <Input
               onChange={this.handleChange}
-              name="login"
-              label="Login"
+              name="nome"
+              label="Nome"
               margin={true}
               placeholder="Seu nome completo"
             ></Input>
@@ -120,7 +153,7 @@ class HouseCard extends React.Component {
             ></Input>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.closeDialog} color="primary">
+            <Button onClick={this.saveVisit} color="primary">
               Agendar
             </Button>
           </DialogActions>

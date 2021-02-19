@@ -11,7 +11,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import StraightenOutlinedIcon from "@material-ui/icons/StraightenOutlined";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
+import getVisits from "../functions/getVisits";
 
+var visits = []
 class PropertyCard extends React.Component {
   constructor() {
     super();
@@ -19,13 +21,17 @@ class PropertyCard extends React.Component {
       showDates: false,
       selectedDate: new Date(),
     };
-
     this.changeShowDates = this.changeShowDates.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
   }
-
-  changeShowDates = () => {
+  async componentWillMount(){
+    
+  }
+   changeShowDates = async() => {
+    visits = []
+    visits = await getVisits(this.props.id)
+    console.log(visits)
     this.setState({
       showDates: !this.state.showDates,
     });
@@ -77,7 +83,7 @@ class PropertyCard extends React.Component {
           </CardContent>
           <CardActions>
             <Button onClick={this.changeShowDates} size="small">
-              Ver Visitias Agendadas
+              Ver Visitias
             </Button>
           </CardActions>
         </Card>
@@ -86,15 +92,17 @@ class PropertyCard extends React.Component {
           aria-labelledby="simple-dialog-title"
           open={this.state.showDates}
         >
-          <DialogTitle id="simple-dialog-title">Agendar Visita</DialogTitle>
-          <DialogContent>{/* 
-          {this.props.visits.map((visit) => {
+          <DialogTitle id="simple-dialog-title">Visitas Agendadas</DialogTitle>
+          <DialogContent>{
+          visits.map((visit) => {
+            var data = new Date(visit.data)
+            let dataFormatada = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear(); 
               return (
                 <div>
-                  Data:{visit.date} Nome:{visit.name} Telefone: {visit.telefone}
+                  Data:{dataFormatada} Nome:{visit.nome} Telefone: {visit.telefone}
                 </div>
               );
-            })} */}
+            })} 
           </DialogContent>
           <DialogActions>
             <Button onClick={this.closeDialog} color="primary">
