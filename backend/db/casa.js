@@ -11,23 +11,11 @@ const CasaSchema = new Schema({
     armario_embutido: Boolean,
     descricao: String,
     login_proprietario: String,
-    codigo: Number
-    /*     foto: [{
-            $binary: "",
-            $type: "0"
-        },  {
-            $binary: "",
-            $type: "0"
-        },  {
-            $binary: "",
-            $type: "0"
-        },  {
-            $binary: "",
-            $type: "0"
-        },  {
-            $binary: "",
-            $type: "0"
-            }] */
+    codigo: Number,
+    logradouro: String,
+    numero: Number,
+    complemento: String,
+    CEP: Number
 })
 
 module.exports = mongoose.model('Casa', CasaSchema, 'casa');

@@ -3,8 +3,10 @@ const Schema = mongoose.Schema
 
 const AgendaSchema = new Schema({
     data: Date,
-    codigo_imovel: String,
-    login_usuario: String
+    codigo_imovel: Number,
+    nome: String,
+    CPF: String,
+    telefone: String
 })
 
 module.exports = mongoose.model('Agenda', AgendaSchema, 'agenda')

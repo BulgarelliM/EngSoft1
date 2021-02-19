@@ -25,8 +25,8 @@ router.route(`/endereco`)
             logradouro: req.body.logradouro,
             numero: req.body.numero,
             complemento: req.body.complemento,
-            bairro: req.body.bairro,
             CEP: req.body.CEP,
+            bairro: req.body.bairro,
             cidade: req.body.cidade
         })
 
@@ -76,8 +76,8 @@ router.route('/endereco/:codigo')
             endereco.logradouro = req.body.logradouro
             endereco.numero = req.body.numero
             endereco.complemento = req.body.complemento
-            endereco.bairro = req.body.bairro
             endereco.CEP = req.body.CEP
+            endereco.bairro = req.body.bairro
             endereco.cidade = req.body.cidade
 
             //Terceiro: Salvando alteração...

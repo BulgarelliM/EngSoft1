@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+//const Endereco = require('../db/endereco')
 
 const ApartamentoSchema = new Schema({
     valor_aluguel: Number,
@@ -17,23 +18,11 @@ const ApartamentoSchema = new Schema({
     login_proprietario: String,
     codigo: Number,
     municipio: String,
-    bairro: String
-    /*     foto: [{
-            $binary: "",
-            $type: "0"
-        },  {
-            $binary: "",
-            $type: "0"
-        },  {
-            $binary: "",
-            $type: "0"
-        },  {
-            $binary: "",
-            $type: "0"
-        },  {
-            $binary: "",
-            $type: "0"
-            }] */
+    bairro: String,
+    logradouro: String,
+    numero: Number,
+    complemento: String,
+    CEP: Number
 })
 
 module.exports = mongoose.model('Apartamento', ApartamentoSchema, 'apartamento')
