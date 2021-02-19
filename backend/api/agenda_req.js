@@ -9,13 +9,15 @@ router.use(function (req, res, next) {
     next()
 })
 
-router.route(`/agenda`)
+router.route(`/agendar`)
     // Método: Adicionar DOC na collection (acessar em: POST http://localhost:8000/agenda
     .post(function (req, res) {
         const agenda = new Agenda({
             data: req.body.data,
             codigo_imovel: req.body.codigo_imovel,
-            login_usuario: req.body.login_usuario
+            nome: req.body.nome,
+            CPF: req.body.CPF,
+            telefone: req.body.telefone
         })
 
         agenda.save(function (error) {
@@ -35,9 +37,9 @@ router.route(`/agenda`)
         })
     })
 
-router.route(`/verAgendamentos`) // Acessar agendamentos marcados em uma determinada data
+router.route(`/agendamentos`) // Acessar agendamentos marcados em uma determinada data
     .post(function (req, res) {
-        Agenda.find({ data: req.body.data }, function (error, agenda) {
+        Agenda.find({ codigo_imovel: req.body.codigo_imovel }, function (error, agenda) {
             if (error)
                 res.send(error)
             res.send(agenda)

@@ -51,7 +51,11 @@ router.route(`/casas`)
             login_proprietario: req.body.login_proprietario,
             codigo: req.body.codigo,
             municipio: req.body.municipio,
-            bairro: req.body.bairro
+            bairro: req.body.bairro,
+            logradouro: req.body.logradouro,
+            numero: req.body.numero,
+            complemento: req.body.complemento,
+            CEP: req.body.CEP
         })
 
         casa.save(function (error) {
@@ -106,7 +110,11 @@ router.route('/casa')
             casa.codigo = req.body.codigo
             casa.municipio = req.body.municipio
             casa.bairro = req.body.bairro
-            
+            casa.logradouro = req.body.logradouro
+            casa.numero = req.body.numero
+            casa.complemento = req.body.complemento
+            casa.CEP = req.body.CEP
+
             casa.save(function (error) {
                 if (error)
                     res.send(error)
