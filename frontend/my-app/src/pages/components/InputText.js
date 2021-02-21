@@ -26,6 +26,7 @@ class InputText extends React.Component {
           InputLabelProps={{
             shrink: true,
           }}
+          value={this.props.value}
           name={this.props.name}
           onChange={this.onChange}
           variant="outlined"

@@ -9,13 +9,13 @@ import Grid from "@material-ui/core/Grid";
 import ComboBox from "./components/ComboBox";
 import ToogleButton from "./components/ToogleButton";
 import municipios from "./base/municipios.json";
-import queryString from 'query-string';
+import queryString from "query-string";
 import bairros from "./base/bairros.json";
-import saveHouse from "./functions/saveHouse"
+import saveHouse from "./functions/saveHouse";
 
 const style = {
   position: "fixed",
-  top: "20%",
+  top: "15%",
   left: "50%",
   width: "50%",
   transform: "translate(-50%, 0%)",
@@ -29,106 +29,90 @@ function getCitys() {
 
   return response.sort();
 }
-function getNeighborhood(city) {
-  let response = bairros.filter((a) => {
-    return a.Nome.split("-")[1].trim() === city;
-  });
-  response = response.map((a) => {
-    return a.Nome.split("-")[0].trim();
-  });
-  return response.sort();
-}
 
-var id =0
+
+var id = "";
 class HouseAdd extends React.Component {
   constructor() {
     super();
     this.state = {
-      date: new Date(),
-      suites: 0,
-      sala_de_estar: 0,
-      quartos: 0,
-      vagas_garagem: 0,
-      area: 0.0,
+      valor_aluguel: 0,
+      num_quartos: 0,
+      num_suites: 0,
+      num_sala_estar: 0,
+      num_vagas_garagem: 0,
+      area: "",
       armario_embutido: false,
       descricao: "",
-      aluguel: 0.0,
-      city: "",
-      neighborhood: "",
-      house: "",
+      condominio: "",
+      municipio: "",
+      bairro: "",
+      logradouro: "",
+      numero: 0,
+      complemento: "",
+      num_sala_jantar: 0,
+      andar: 0,
+      portaria_24: false,
+      CEP: "",
       neighborhoodsOptions: [],
-      citys:[]
+      citys: [],
     };
 
     this.handleDateChange = this.handleDateChange.bind(this);
-    this.save_house = this.save_house.bind(this);
-    this.changeCity = this.changeCity.bind(this);
-    this.changeNeighborhood = this.changeNeighborhood.bind(this);
+    this.salvar = this.salvar.bind(this);
   }
-  save = async () => {
-    let type = this.state.house?"casa":"apartamento"
+  salvar = async () => {
+    let type = !this.state.house ? "Casa" : "apartamento";
     let response = await saveHouse(
       type,
-      this.state.suites,
-      this.state.sala_de_estar,
-      this.state.quartos,
-      this.state.vagas_garagem,
+      this.state.valor_aluguel,
+      this.state.num_quartos,
+      this.state.num_suites,
+      this.state.num_sala_estar,
+      this.state.num_vagas_garagem,
       this.state.area,
       this.state.armario_embutido,
       this.state.descricao,
-      this.state.aluguel,
-      this.state.city,
-      this.state.neighborhood,
-      this.state.endereco,
-      this.state.Andar,
-      this.state.portaria_24h,
-      this.state.sala_de_jantar,
-      this.state.Condominio,
+      this.state.condominio,
+      this.state.municipio,
+      this.state.bairro,
+      this.state.logradouro,
+      this.state.numero,
+      this.state.complemento,
+      this.state.num_sala_jantar,
+      this.state.andar,
+      this.state.portaria_24,
+      this.state.CEP,
       id
-    )
-    console.log(response)
-    if(response !=  false){
+    );
+    console.log(response);
+    if (response != false) {
       this.props.history.push("/");
-    }else{
-      this.setState({ 
+    } else {
+      this.setState({
         errorCreate: true,
-      })
+      });
     }
-  } 
-  close = () =>{
+  };
+  close = () => {
     this.setState({
       errorCreate: false,
-    })
-  }
-changeNeighborhood = (text) => {
-  this.setState({
-    neighborhood: text,
-  });
-};
-changeCity = (text) => {
-  this.setState({
-    city: text,
-    neighborhoodsOptions: getNeighborhood(text),
-  });
-};
+    });
+  };
 
   handleDateChange = (name, value) => {
-    console.log(value);
     this.setState({
       [name]: value,
     });
   };
 
-  save_house = () => {
-    console.log(this.state);
-  };
-
-  componentWillMount(){
-    let params = queryString.parse(this.props.location.search)
-    id = params.id
+  componentWillMount() {
+    let params = queryString.parse(this.props.location.search);
+    id = params.id;
+    console.log("ID=" + id);
     this.setState({
       citys: getCitys(),
-    })
+    });
   }
   render() {
     return (
@@ -143,18 +127,20 @@ changeCity = (text) => {
             <Grid item xs={8}>
               <InputValues
                 onChange={this.handleDateChange}
-                name="Aluguel"
+                name="valor_aluguel"
                 label="Aluguel"
                 placeholder="Valor do aluguel"
+                value={this.state.valor_aluguel}
               />
             </Grid>
             {this.state.house ? (
               <Grid item xs={4}>
                 <InputValues
                   onChange={this.handleDateChange}
-                  name="Condominio"
+                  name="condominio"
                   label="Condominio"
                   placeholder="Valor do condominio"
+                  value={this.state.condominio}
                 />
               </Grid>
             ) : (
@@ -163,51 +149,55 @@ changeCity = (text) => {
             <Grid item xs={4}>
               <InputNumber
                 onChange={this.handleDateChange}
-                name="quartos"
-                label="Quartos"                
+                name="num_quartos"
+                label="Quartos"
                 placeholder="Nº de quartos"
+                value={this.state.num_quartos}
               />
             </Grid>
             <Grid item xs={4}>
               <InputNumber
                 onChange={this.handleDateChange}
-                name="suites"
+                name="num_suites"
                 label="Suítes"
                 placeholder="Nº de suites"
+                value={this.state.num_suites}
               />
             </Grid>
             <Grid item xs={4}>
               <InputNumber
                 onChange={this.handleDateChange}
-                name="sala_de_estar"
+                name="num_sala_estar"
                 label="Sala de estar"
                 placeholder="Nº de salas de estar"
+                value={this.state.num_sala_estar}
               />
             </Grid>
             <Grid item xs={4}>
               <InputNumber
                 onChange={this.handleDateChange}
-                name="vagas_garagem"
+                name="num_vagas_garagem"
                 label="Vagas de garagem"
                 placeholder="Nº de vagas de garagem"
+                value={this.state.num_vagas_garagem}
               />
             </Grid>
-
             <Grid item xs={4}>
               <InputText
                 onChange={this.handleDateChange}
                 name="area"
                 label="Área m²"
                 placeholder="Área do imovel²"
+                value={this.state.area}
               />
             </Grid>
-
             <Grid item xs={4}>
               <ComboBox
                 label="Armário embutido"
                 placeholder="Contem Armarios?"
                 name="armario_embutido"
                 options={["Sim", "Não"]}
+                value={this.state.armario_embutido ? "Sim" : "Não"}
                 onChange={this.handleDateChange}
               />
             </Grid>
@@ -217,17 +207,19 @@ changeCity = (text) => {
                   <Grid item xs={4}>
                     <InputNumber
                       onChange={this.handleDateChange}
-                      name="sala_de_jantar"
+                      name="num_sala_jantar"
                       label="Sala de jantar"
                       placeholder="Nº de Salas de jantar"
+                      value={this.state.num_sala_jantar}
                     />
                   </Grid>
                   <Grid item xs={4}>
                     <InputNumber
                       onChange={this.handleDateChange}
-                      name="Andar"
+                      name="andar"
                       label="Andar"
                       placeholder="Nº Andar"
+                      value={this.state.andar}
                     />
                   </Grid>
                   <Grid item xs={4}>
@@ -235,38 +227,68 @@ changeCity = (text) => {
                       placeholder="Portaria 24 Hrs?"
                       options={["Sim", "Não"]}
                       onChange={this.handleDateChange}
-                      name="portaria_24h"
+                      name="portaria_24"
                       label="Portaria 24 Hrs"
+                      value={this.state.portaria_24 ? "Sim" : "Não"}
                     />
                   </Grid>
                 </Grid>
               ) : (
                 ""
               )}
-  </Grid>
+            </Grid>
             <Grid item xs={8}>
               <ComboBox
                 label="Cidade"
                 placeholder="Nome da cidade"
+                name="municipio"
                 options={this.state.citys}
-                onChange={this.changeCity}
+                onChange={this.handleDateChange}
               />
             </Grid>
             <Grid item xs={4}>
-              <ComboBox
+              <Input
                 label="Bairro"
                 placeholder="Nome do bairro"
-                options={this.state.neighborhoodsOptions}
-                onChange={this.changeNeighborhood}
+                name="bairro"
+                onChange={this.handleDateChange}
               />
             </Grid>
-            <Grid item xs={12}>
-              <Input  onChange={this.handleDateChange}
-                name="endereco"
+            <Grid item xs={8}>
+              <Input
+                onChange={this.handleDateChange}
+                name="logradouro"
                 label="Endereço"
-                placeholder=" Nome da rua, nº xx"
-                >
-              </Input>
+                placeholder=" Nome da rua"
+                value={this.state.logradouro}
+              ></Input>
+            </Grid>
+            <Grid item xs={4}>
+              <InputNumber
+                onChange={this.handleDateChange}
+                name="numero"
+                label="Numero"
+                placeholder="Nº da casa"
+                value={this.state.numero}
+              />
+            </Grid>
+            <Grid item xs={8}>
+              <Input
+                onChange={this.handleDateChange}
+                name="complemento"
+                label="Complemento"
+                placeholder="complemento"
+                value={this.state.complemento}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Input
+                onChange={this.handleDateChange}
+                name="CEP"
+                label="CEP"
+                placeholder="cep"
+                value={this.state.CEP}
+              />
             </Grid>
             <Grid item xs={12}>
               <InputArea
@@ -274,11 +296,12 @@ changeCity = (text) => {
                 name="descricao"
                 label="Descrição"
                 placeholder="Breve descrição do imovel"
+                value={this.state.descricao}
               />
-            </Grid>
+            </Grid>{" "}
             <Grid item xs={12}>
               <Button
-                onClick={this.save_house}
+                onClick={this.salvar}
                 variant="outlined"
                 color="primary"
                 style={{ width: "100%" }}

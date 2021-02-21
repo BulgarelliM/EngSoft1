@@ -1,6 +1,7 @@
 import config from "../base/config.json";
 
-export default async function saveHouse(
+export default async function editHouse(
+  codigo,
   type,
   valor_aluguel,
   num_quartos,
@@ -19,16 +20,16 @@ export default async function saveHouse(
   num_sala_jantar,
   andar,
   portaria_24,
-  CEP,
-  login_proprietario
+  CEP
 ) {
   let url = "";
   if (type == "Casa") {
-    url = config.baseURL + "/casas";
+    url = config.baseURL + "/casa";
   } else {
-    url = config.baseURL + "/apartamentos";
+    url = config.baseURL + "/apartamento";
   }
   let body = {
+    codigo,
     valor_aluguel: `${valor_aluguel}`,
     num_quartos,
     num_suites,
@@ -47,13 +48,12 @@ export default async function saveHouse(
     andar,
     portaria_24: `${portaria_24}`,
     CEP: `${CEP}`,
-    login_proprietario: `${login_proprietario}`,
   };
-  let isLogin = false;
-  let myRequest = new Request(url);
+  let edited = false;
   console.log(body);
+  let myRequest = new Request(url);
   await fetch(myRequest, {
-    method: "POST",
+    method: "PUT",
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
@@ -66,8 +66,13 @@ export default async function saveHouse(
         return "error";
       }
     })
-    .then((response) => {})
+    .then((response) => {
+      console.log(response);
+      if(response.ok>=1){
+        edited = true
+      }
+    })
     .catch((error) => {});
 
-  return isLogin;
+  return edited;
 }

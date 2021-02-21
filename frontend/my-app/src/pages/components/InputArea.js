@@ -1,6 +1,5 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
-
+import React from "react";
+import TextField from "@material-ui/core/TextField";
 
 class InputArea extends React.Component {
   constructor() {
@@ -9,7 +8,7 @@ class InputArea extends React.Component {
   }
 
   onChange(event) {
-    console.log(event.target)
+    console.log(event.target);
     this.props.onChange(event.target.name, event.target.value);
   }
   render() {
@@ -27,6 +26,7 @@ class InputArea extends React.Component {
           fullWidth
           placeholder={this.props.placeholder}
           multiline
+          value={this.props.value}
           variant="outlined"
           rowsMax={10}
         />

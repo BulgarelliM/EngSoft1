@@ -7,6 +7,18 @@ import IconButton from "@material-ui/core/IconButton";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import HouseView from "./HouseView";
+import Slide from "@material-ui/core/Slide";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import Toolbar from "@material-ui/core/Toolbar";
+import CloseIcon from "@material-ui/icons/Close";
+import DialogContent from "@material-ui/core/DialogContent";
+
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const style = {
   position: "fixed",
@@ -29,6 +41,7 @@ class ListHouses extends React.Component {
       page: 1,
       limit: 6,
       loading: true,
+      showDialog: false,
     };
   }
 
@@ -44,6 +57,8 @@ class ListHouses extends React.Component {
   };
 
   async componentWillMount() {
+    
+    console.log(this.props)
     let params = queryString.parse(this.props.location.search);
     console.log(params);
     allHouses = await findHouse(
@@ -96,9 +111,25 @@ class ListHouses extends React.Component {
     this.forceUpdate();
     console.log(houses);
   };
+
+
+  show = (value, type) => {
+    console.log(value);
+    this.setState({
+      showDialog: true,
+      selectId: value,
+      selectType: type,
+    });
+  };
+  closeDialog = () => {
+    this.setState({
+      showDialog: false,
+    });
+  }
   render() {
     return (
       <React.Fragment>
+        
         {this.state.loading ? (
           <CircularProgress />
         ) : (
@@ -124,7 +155,8 @@ class ListHouses extends React.Component {
                             ? "Apartamento"
                             : "Casa"
                         }
-                        id={house.codigo}
+                        onEdit={this.show}
+                        id={house._id}
                         city={house.municipio}
                         neighborhood={house.bairro}
                         rooms={house.num_quartos}
@@ -150,6 +182,31 @@ class ListHouses extends React.Component {
             </div>
           </div>
         )}
+         <Dialog
+              
+              onClose={this.closeDialog}
+              open={this.state.showDialog}
+              TransitionComponent={Transition}
+            >
+              <Toolbar>
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  onClick={this.closeDialog}
+                  aria-label="close"
+                >
+                  <CloseIcon />
+                </IconButton>
+              </Toolbar>
+              <DialogContent>
+                <HouseView
+                  houseId={this.state.selectId}
+                  exit={this.closeDialog}
+                  type={this.state.selectType}
+                />
+              </DialogContent>
+              <DialogActions></DialogActions>
+            </Dialog>
       </React.Fragment>
     );
   }

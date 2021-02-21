@@ -21,6 +21,8 @@ class Input extends React.Component {
           name={this.props.name}
           placeholder={this.props.placeholder}
           onChange={this.onChange}
+          
+          value={this.props.value}
           margin={this.props.margin?"normal":"none"}
           InputLabelProps={{
             shrink: true,

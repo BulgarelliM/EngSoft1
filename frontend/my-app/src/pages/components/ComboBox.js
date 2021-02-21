@@ -11,6 +11,7 @@ class ComboBox extends React.Component {
   onChange(event) {
     this.props.onChange(event.target.value);
   }
+  
   render() {
     return (
       <React.Fragment>
@@ -18,6 +19,7 @@ class ComboBox extends React.Component {
           id="country-select-demo"
           options={this.props.options}
           autoHighlight
+          inputValue={this.props.value}
           getOptionLabel={(option) => option}
           renderOption={(option) => (
             <React.Fragment>
@@ -31,6 +33,7 @@ class ComboBox extends React.Component {
               label={this.props.label}
               onChange={this.onChange}
               onSelect={this.onChange}
+              value={this.props.value}
               placeholder={this.props.placeholder}
               variant="outlined"
               InputLabelProps={{
@@ -38,7 +41,6 @@ class ComboBox extends React.Component {
               }}
               inputProps={{
                 ...params.inputProps,
-                autoComplete: "new-password", // disable autocomplete and autofill
               }}
             />
           )}

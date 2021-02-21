@@ -9,7 +9,6 @@ class InputValues extends React.Component {
   }
 
   onChange(event) {
-    console.log(event.target);
     this.props.onChange(event.target.name, event.target.value);
   }
   render() {
@@ -29,6 +28,7 @@ class InputValues extends React.Component {
           }}
           name={this.props.name}
           onChange={this.onChange}
+          value={this.props.value}
           variant="outlined"
         />
       </React.Fragment>

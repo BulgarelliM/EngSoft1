@@ -4,7 +4,27 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import municipios from "./base/municipios.json";
 import bairros from "./base/bairros.json";
+import Logo from "../logo.png";
+import subLogo from "../sublogo.png";
 
+const style1 = {
+  position: "fixed",
+  top: "6%",
+  left: "50%",
+  width: "50%",
+  transform: "translate(-50%, 0%)",
+  padding: "0px !important",
+  margin: "5px",
+};
+const style2 = {
+  position: "fixed",
+  top: "23%",
+  left: "50%",
+  width: "35%",
+  transform: "translate(-50%, 0%)",
+  padding: "0px !important",
+  margin: "5px",
+};
 const style = {
   position: "fixed",
   top: "50%",
@@ -13,7 +33,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   padding: "0px !important",
 };
-const roomOpts = ["1", "2", "3", "4", "4 +"];
+const roomOpts = ["1", "2", "3","4"];
 const valuesOpts = [
   "R$ 1000",
   "R$ 2000",
@@ -90,7 +110,7 @@ class SearchPage extends React.Component {
       ? (query = query + "&neighborhood=" + this.state.neighborhood + "&")
       : (query = query);
     this.state.price != 0
-      ? (query = query + "price=" + this.state.price + "&")
+      ? (query = query + "price=" + this.state.price.split(" ")[1] + "&")
       : (query = query);
     this.state.rooms != 0
       ? (query = query + "rooms=" + this.state.rooms + "&")
@@ -115,6 +135,13 @@ class SearchPage extends React.Component {
   render() {
     return (
       <React.Fragment>
+        {" "}
+        <div style={style1}>
+          <img src={Logo} alt="logo" />
+        </div>
+        <div style={style2}>
+          <img src={subLogo} alt="AGATA" style={{ width: "30%" }} />
+        </div>
         <div style={style}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
@@ -168,7 +195,7 @@ class SearchPage extends React.Component {
                 color="primary"
                 style={{ width: "100%" }}
               >
-                Anunciar imovel
+                Area do anunciante
               </Button>
             </Grid>
             <Grid item xs={4}></Grid>

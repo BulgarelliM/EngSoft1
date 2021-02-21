@@ -1,15 +1,14 @@
 import config from "../base/config.json";
 
-export default async function getVisits(id) {
-  let url = config.baseURL + "/agendamentos";
-  var body = {
-    codigo_imovel: `${id}`,
-  };
+export default async function deleteAgend(id) {
+  console.log("F: "+id)
+  let url = config.baseURL + "/agendar?codigo="+`${id}`;
+ 
   let myRequest = new Request(url);
-  let works = [];
+  console.log(url)
+  let works = false;
   await fetch(myRequest, {
-    method: "POST",
-    body: JSON.stringify(body),
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
@@ -22,11 +21,11 @@ export default async function getVisits(id) {
       }
     })
     .then((json) => {
-        works = json;
+        works = true;
     })
     .catch((error) => {
       console.error(error);
-      works = [];
+      works = false;
     });
   return works;
 }

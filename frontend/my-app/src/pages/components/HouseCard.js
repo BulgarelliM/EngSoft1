@@ -7,15 +7,17 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import SingleBedIcon from "@material-ui/icons/SingleBed";
+import StraightenOutlinedIcon from "@material-ui/icons/StraightenOutlined";
 import DatePicker from "./DatePicker";
 import Snackbar from "@material-ui/core/Snackbar";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import StraightenOutlinedIcon from "@material-ui/icons/StraightenOutlined";
 import Dialog from "@material-ui/core/Dialog";
 import Input from "./Input";
 import DialogContent from "@material-ui/core/DialogContent";
 import agend from "../functions/agend";
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
+import IconButton from "@material-ui/core/IconButton";
 class HouseCard extends React.Component {
   constructor() {
     super();
@@ -28,6 +30,7 @@ class HouseCard extends React.Component {
     this.changeShowDates = this.changeShowDates.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
+    this.edit = this.edit.bind(this);
   }
 
   changeShowDates = () => {
@@ -51,6 +54,10 @@ class HouseCard extends React.Component {
       [name]: value,
     });
   };
+
+  edit() {
+    this.props.onEdit(this.props.id, this.props.type);
+  }
   saveVisit = async () => {
     let agendar = await agend(
       this.state.date,
@@ -62,15 +69,16 @@ class HouseCard extends React.Component {
     if (agendar) {
       this.setState({
         agendado: true,
-        showDates: false
+        showDates: false,
       });
     }
   };
-  close = () =>{
+  close = () => {
     this.setState({
       agendado: false,
-    })
-  }
+    });
+  };
+  
   render() {
     return (
       <React.Fragment>
@@ -110,13 +118,22 @@ class HouseCard extends React.Component {
               </Grid>
             </Typography>
             <Typography color="textSecondary">
-              Aluguel: {this.props.price}
+              Aluguel: R${this.props.price}
             </Typography>
           </CardContent>
           <CardActions>
             <Button onClick={this.changeShowDates} size="small">
-              Agendar Visitia
+              Agendar Visita
             </Button>
+            <div
+              style={{
+                "margin-left": "auto",
+              }}
+            >
+              <IconButton aria-label="delete">
+                <InfoOutlinedIcon onClick={this.edit} />
+              </IconButton>
+            </div>
           </CardActions>
         </Card>
         <Dialog
