@@ -1,5 +1,5 @@
 # Laboratorio de Engenharia de Software
----
+
 
 ### Trabalho desenvolvido para a disciplina de Laboratório de Engenharia de Software do curso de Engenharia de Computação do CEFET-MG.
 
@@ -14,6 +14,7 @@
   <li>Robert Cristiam</li>
 </ul>
 
+
 <hr style="border:1px  solid blue"> </hr>
 
 <p align="center">
@@ -24,8 +25,9 @@
   <img src="https://i.ibb.co/g7L8X2W/sublogo.png" />
 </p>
 
-
 <hr style="border:1px  solid blue"> </hr>
+<br>
+<br>
 
 ## Tech
 
@@ -37,6 +39,7 @@ Agata Imobiliária usa um número de projetos open source para funcionar:
 
 
 ## Instalação
+
 ### Backend
 A Backend do aplicativo necessita de [Node.js](https://nodejs.org/) v.10 ou mais para a execução.
 Abra o terminal na pasta do projeto principal.
