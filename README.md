@@ -1,9 +1,10 @@
 # Laboratorio de Engenharia de Software
 
-
-### Trabalho desenvolvido para a disciplina de Laboratório de Engenharia de Software do curso de Engenharia de Computação do CEFET-MG.
+###### _Trabalho desenvolvido para a disciplina de Laboratório de Engenharia de Software do curso de Engenharia de Computação do CEFET-MG._
 
 <p> O trabalho refere-se a um website de uma imobiliária, contendo uma página principal de busca de imóveis, uma página de cadastro de usuário, uma página de cadastro de imóveis, página de login, pagina do perfil de usuário e página de consultas de visitas agendadas para os imóveis.</p>
+
+#### Professor: Eduardo Campos
 
 #### Integrantes:
 
