@@ -87,7 +87,7 @@ class HouseAdd extends React.Component {
     );
     console.log(response);
     if (response != false) {
-      this.props.history.push("/");
+      this.props.history.push("/AgataImobiliaria/");
     } else {
       this.setState({
         errorCreate: true,

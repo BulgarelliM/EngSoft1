@@ -84,7 +84,7 @@ class ListProperty extends React.Component {
     });
   };
   addHouse = () => {
-    this.props.history.push("/add?id=" + id);
+    this.props.history.push("/AgataImobiliaria/add?id=" + id);
   };
   update = () => {
     this.setState({

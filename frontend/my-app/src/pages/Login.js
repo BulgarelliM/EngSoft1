@@ -38,13 +38,13 @@ class Login extends React.Component {
     });
   };
   create = () => {
-    this.props.history.push("/create");
+    this.props.history.push("/AgataImobiliaria/create");
   };
   login = async () => {
     let user = await loginFunction(this.state.login, this.state.senha);
     console.log("USER: "+user)
     if (user != "error") {
-      this.props.history.push("/listProperty?id=" + user.login);
+      this.props.history.push("/AgataImobiliaria/listProperty?id=" + user.login);
     } else {
       this.setState({
         isLogged: true,

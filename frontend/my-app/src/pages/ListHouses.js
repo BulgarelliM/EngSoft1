@@ -67,6 +67,7 @@ class ListHouses extends React.Component {
       params.rooms,
       params.price
     );
+    console.log(allHouses)
     allHouses.forEach((house, index) => {
       if (index >= init && houses.length < this.state.limit) {
         houses.push(house);

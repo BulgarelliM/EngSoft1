@@ -32,7 +32,7 @@ class CreateUser extends React.Component {
     let response = await saveUser(this.state.nome,this.state.email,this.state.login,this.state.senha,this.state.telefone)
     console.log(response)
     if(response !=  false){
-      this.props.history.push("/add?id=" + this.state.login);
+      this.props.history.push("/AgataImobiliaria/listProperty?id=" + this.state.login);
     }else{
       this.setState({ 
         errorCreate: true,

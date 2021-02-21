@@ -14,7 +14,7 @@ function App() {
          
         <BrowserRouter>
           <Switch>
-            <Route path="/AgataImobiliaria/" component={Search} />
+            <Route path="/AgataImobiliaria/" exact={true} component={Search} />
             <Route path="/AgataImobiliaria/logar" component={Login} />
             <Route path="/AgataImobiliaria/add" component={HouseAdd} />
             <Route path="/AgataImobiliaria/houses" component={ListHouses} />

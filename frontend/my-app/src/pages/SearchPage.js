@@ -6,6 +6,7 @@ import municipios from "./base/municipios.json";
 import bairros from "./base/bairros.json";
 import Logo from "../logo.png";
 import subLogo from "../sublogo.png";
+import Input from "./components/Input";
 
 const style1 = {
   position: "fixed",
@@ -50,15 +51,6 @@ function getCitys() {
 
   return response.sort();
 }
-function getNeighborhood(city) {
-  let response = bairros.filter((a) => {
-    return a.Nome.split("-")[1].trim() === city;
-  });
-  response = response.map((a) => {
-    return a.Nome.split("-")[0].trim();
-  });
-  return response.sort();
-}
 class SearchPage extends React.Component {
   constructor() {
     super();
@@ -79,7 +71,8 @@ class SearchPage extends React.Component {
     this.addHouse = this.addHouse.bind(this);
   }
 
-  changeNeighborhood = (text) => {
+  changeNeighborhood = (name,text) => {
+    console.log(text)
     this.setState({
       neighborhood: text,
     });
@@ -97,7 +90,6 @@ class SearchPage extends React.Component {
   changeCity = (text) => {
     this.setState({
       city: text,
-      neighborhoodsOptions: getNeighborhood(text),
     });
   };
 
@@ -107,7 +99,7 @@ class SearchPage extends React.Component {
       ? (query = query + "city=" + this.state.city + "&")
       : (query = query);
     this.state.neighborhood != ""
-      ? (query = query + "&neighborhood=" + this.state.neighborhood + "&")
+      ? (query = query + "neighborhood=" + this.state.neighborhood + "&")
       : (query = query);
     this.state.price != 0
       ? (query = query + "price=" + this.state.price.split(" ")[1] + "&")
@@ -115,15 +107,15 @@ class SearchPage extends React.Component {
     this.state.rooms != 0
       ? (query = query + "rooms=" + this.state.rooms + "&")
       : (query = query);
-    console.log("/houses" + query);
-    this.props.history.push("/houses" + query);
+    console.log("/AgataImobiliaria/houses" + query);
+    this.props.history.push("/AgataImobiliaria/houses" + query);
   };
 
   addHouse = () => {
     if (this.props.userLogin) {
-      this.props.history.push("/add");
+      this.props.history.push("/AgataImobiliaria/add");
     } else {
-      this.props.history.push("/logar");
+      this.props.history.push("/AgataImobiliaria/logar");
     }
   };
   componentWillMount() {
@@ -153,10 +145,10 @@ class SearchPage extends React.Component {
               />
             </Grid>
             <Grid item xs={4}>
-              <ComboBox
+              <Input
                 label="Bairro"
+                name="bairro"
                 placeholder="Busque por bairro"
-                options={this.state.neighborhoodsOptions}
                 onChange={this.changeNeighborhood}
               />
             </Grid>

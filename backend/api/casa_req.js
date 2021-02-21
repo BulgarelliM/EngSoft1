@@ -14,11 +14,8 @@ router
 
   .post(function (req, res) {
     let body = {};
-    req.body.municipio
-      ? (body.municipio = req.body.municipio)
-      : req.body.bairro
-      ? (body.bairro = req.body.bairro)
-      : 
+    req.body.municipio ? (body.municipio = req.body.municipio) : "";
+    req.body.bairro ? (body.bairro = req.body.bairro) : "";
     Casa.find(body, function (error, casa) {
       if (error) {
         res.send(error);

@@ -19,26 +19,24 @@ router
 
   .post(function (req, res) {
     let body = {};
-    req.body.municipio
-      ? (body.municipio = req.body.municipio)
-      : req.body.bairro
-      ? (body.bairro = req.body.bairro)
-      : Apartamento.find(body, function (error, apartamento) {
-          if (error) {
-            res.send(error);
-          }
-          if (req.body.num_quartos) {
-            apartamento = apartamento.filter((ap) => {
-              return ap.num_quartos >= req.body.num_quartos;
-            });
-          }
-          if (req.body.valor_aluguel) {
-            apartamento = apartamento.filter((ap) => {
-              return ap.valor_aluguel <= req.body.valor_aluguel;
-            });
-          }
-          res.send(apartamento);
+    req.body.municipio ? (body.municipio = req.body.municipio) : "";
+    req.body.bairro ? (body.bairro = req.body.bairro) : "";
+    Apartamento.find(body, function (error, apartamento) {
+      if (error) {
+        res.send(error);
+      }
+      if (req.body.num_quartos) {
+        apartamento = apartamento.filter((ap) => {
+          return ap.num_quartos >= req.body.num_quartos;
         });
+      }
+      if (req.body.valor_aluguel) {
+        apartamento = apartamento.filter((ap) => {
+          return ap.valor_aluguel <= req.body.valor_aluguel;
+        });
+      }
+      res.send(apartamento);
+    });
   });
 
 // Rotas que irão terminar em '/apartamentos' - (servem tanto para: GET All & POST)
@@ -93,14 +91,11 @@ router
   // Método: Selecionar Por Código (acessar em: GET http://localhost:8080/apartamento)
   .get(function (req, res) {
     //Função para Selecionar Por Código e verificar se há algum erro:
-    Apartamento.find(
-      { _id: req.query.codigo },
-      function (error, apartamento) {
-        if (error) res.send(error);
+    Apartamento.find({ _id: req.query.codigo }, function (error, apartamento) {
+      if (error) res.send(error);
 
-        res.send(apartamento);
-      }
-    );
+      res.send(apartamento);
+    });
   })
 
   // Método: Atualizar (acessar em: PUT http://localhost:8000/apartamento)
