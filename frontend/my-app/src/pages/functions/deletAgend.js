@@ -11,6 +11,7 @@ export default async function deleteAgend(id) {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
     },
   })
     .then((response) => {

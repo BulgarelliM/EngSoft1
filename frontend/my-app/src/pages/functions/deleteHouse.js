@@ -1,6 +1,6 @@
 import config from "../base/config.json";
 
-export default async function deleteHouse(houseId,type) {
+export default async function deleteHouse(houseId, type) {
   let url = "";
   if (type == "Casa") {
     url = config.baseURL + "/casa?codigo=" + houseId;
@@ -8,9 +8,15 @@ export default async function deleteHouse(houseId,type) {
     url = config.baseURL + "/apartamento?codigo=" + houseId;
   }
   let house = false;
-  let myRequest = new Request(url, { method: "DELETE" });
-  console.log(myRequest)
-  await fetch(myRequest)
+  let myRequest = new Request(url);
+  console.log(myRequest);
+  await fetch(myRequest, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
     .then((response) => {
       if (response.status === 200) {
         return response.json();
@@ -19,7 +25,7 @@ export default async function deleteHouse(houseId,type) {
       }
     })
     .then((json) => {
-        house = json;
+      house = json;
     })
     .catch((error) => {});
 

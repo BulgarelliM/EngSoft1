@@ -88,12 +88,8 @@ class ListHouses extends React.Component {
         houses.push(house);
       }
     });
-    emptys = [];
-    for (let index = houses.length; index < this.state.limit; index++) {
-      emptys.push(<Grid item xs={4} style={{display: "none"}}><HouseCard/></Grid>);
-    }
+    
     this.forceUpdate();
-    console.log(houses);
   };
   back = () => {
     init = init - this.state.limit;
@@ -105,10 +101,7 @@ class ListHouses extends React.Component {
         houses.push(house);
       }
     });
-    emptys = [];
-    for (let index = houses.length; index < this.state.limit; index++) {
-      emptys.push(<Grid item xs={4} style={{display: "none"}}><HouseCard/></Grid>);
-    }
+   
     this.forceUpdate();
     console.log(houses);
   };
@@ -144,7 +137,7 @@ class ListHouses extends React.Component {
                 </IconButton>
               )}
             </div>
-            <div>
+            <div style={{"width": "100%"}}>
               <Grid container spacing={1}>
                 {houses.map((house) => {
                   return (
@@ -168,7 +161,6 @@ class ListHouses extends React.Component {
                     </Grid>
                   );
                 })}
-                {emptys}
               </Grid>
             </div>
 

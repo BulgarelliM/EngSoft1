@@ -25,7 +25,6 @@ class CreateUser extends React.Component {
         telefone: "" ,
         errorCreate: false
     };
-
     this.handleDateChange = this.handleDateChange.bind(this);
   }
   save = async () => {

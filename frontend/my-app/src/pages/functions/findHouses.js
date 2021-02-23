@@ -15,6 +15,7 @@ export default async function findHouse(city, neighborhood, rooms, price) {
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
     },
   })
     .then((response) => {

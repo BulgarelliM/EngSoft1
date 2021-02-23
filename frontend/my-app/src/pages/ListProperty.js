@@ -115,6 +115,7 @@ class ListProperty extends React.Component {
                   Anunciar imovel
                 </Button>
               </Grid>
+              <div style={{"width": "100%"}}>
               {houses.map((house) => {
                 return (
                   <Grid item xs={4}>
@@ -135,6 +136,7 @@ class ListProperty extends React.Component {
                   </Grid>
                 );
               })}
+              </div>
             </Grid>
             <Dialog
               fullScreen

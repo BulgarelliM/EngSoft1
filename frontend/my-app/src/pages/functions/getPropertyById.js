@@ -12,6 +12,7 @@ export default async function getPropertyById(id) {
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
     },
   })
     .then((response) => {
