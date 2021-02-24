@@ -7,14 +7,24 @@
 #### Professor: Eduardo Campos
 
 #### Integrantes:
-
-<ul>
-  <li>Diego Santos</li>
-  <li>Mariana Bulgarelli</li>
-  <li>Renan Siman</li>
-  <li>Robert Cristiam</li>
-</ul>
-
+<table>
+  <tr>
+   <td><b>Diego Santos Gonçalves</b></td>
+   <td><a href="https://github.com/dissantos"><img align="center" src="https://avatars.githubusercontent.com/u/49028141?s=400&v=4" width="25px;" alt=""/>dissantos</a><br/></td>
+  </tr>
+  <tr>
+    <td><b>Mariana Bulgarelli Alves dos Santos</b></td>
+    <td><a href="https://github.com/BulgarelliM"><img align="center" src="https://avatars.githubusercontent.com/u/42696123?s=460&u=c7ab48580269b43a0d9e6595fd2fcf65874765db&v=4" width="25px;" alt=""/>BulgarelliM</a><br/></td>
+   </tr>
+  <tr>
+    <td><b>Renan Siman Claudino</b></td>
+    <td><a href="https://github.com/RenanSiman"><img align="center" src="https://avatars.githubusercontent.com/u/31517127?s=460&u=9882f9e624feb52b48c5b510b195ac669a7dfef4&v=4" width="25px;" alt=""/>RenanSiman</a><br/></td>
+   </tr>
+  <tr>
+    <td><b>Robert Cristiam Faustino de Souza</b></td>
+    <td><a href="https://github.com/hobbitx"><img align="center" src="https://avatars.githubusercontent.com/u/14082208?s=460&u=df01b3925b145a6c448567f2f8fbb6bf46115c4c&v=4" width="25px;" alt=""/>hobbitx</a><br/></td>
+   </tr>
+</table>
 
 <hr style="border:1px  solid blue"> </hr>
 
